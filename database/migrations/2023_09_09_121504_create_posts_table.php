@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text("body")->collation("utf8_general_ci");
             $table->integer("view")->default(0);
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('cat_id')->constrained('category');
+            $table->foreignId('cat_id')->constrained('categories');
             $table->text("text");
             $table->enum('status',["enable","disable"])->default("disable");
             $table->tinyInteger('selelcted');
