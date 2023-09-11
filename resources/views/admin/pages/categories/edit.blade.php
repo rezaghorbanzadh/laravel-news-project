@@ -13,13 +13,15 @@
 
         <section class="row my-3 ">
             <section class="col-12 ">
-                <form method="post " action=" ">
+                <form method="post" action="{{ route('admin.category.update',$category->id) }}">
+                    @csrf
+                    {{method_field('put') }}
                     <div class="form-group ">
                         <label for="name ">Title</label>
-                        <input type="text " class="form-control " id="name " name="name " placeholder="Enter name ... " value=" ">
-                        <!--            <small id="emailHelp " class="form-text text-muted ">We'll never share your email with anyone else.</small>-->
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter name ... " value="{{ old('name', $category->name) }}">
+                                   <small id="emailHelp " class="form-text text-muted ">We'll never share your email with anyone else.</small>
                     </div>
-                    <button type="submit " class="btn btn-primary btn-sm ">update</button>
+                    <button type="submit" class="btn btn-primary btn-sm ">update</button>
                 </form>
             </section>
         </section>

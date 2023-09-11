@@ -48,18 +48,22 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Category $category)
     {
-        return view("admin.pages.categories.edit");
+        return view('admin.pages.categories.edit', compact("category"));
+
 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,  Category $category)
     {
-        //
+        $inputs = $request->all();
+        $category->update($inputs);
+
+        return redirect()->route('admin.category.index');
     }
 
     /**

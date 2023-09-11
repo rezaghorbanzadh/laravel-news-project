@@ -17,8 +17,8 @@ Route::prefix('/admin')->namespace("Admin")->group(function (){
         Route::get('/' , [CategoryController::class , 'index'])->name('admin.category.index');
         Route::get('/create' , [CategoryController::class , 'create'])->name('admin.category.create');
         Route::post('/store' , [CategoryController::class , 'store'])->name('admin.category.store');
-        Route::get('/edit/{id}' , [CategoryController::class , 'edit'])->name('admin.category.edit');
-        Route::put('/update/{id}' , [CategoryController::class , 'update'])->name('admin.category.update');
+        Route::get('/edit/{category}' , [CategoryController::class , 'edit'])->name('admin.category.edit');
+        Route::put('/update/{category}' , [CategoryController::class , 'update'])->name('admin.category.update');
         Route::delete('/destroy/{id}' , [CategoryController::class , 'destroy'])->name('admin.category.destroy');
     });
 });
