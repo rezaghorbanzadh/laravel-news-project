@@ -15,6 +15,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">
 
     <link href="{{asset("assets/admin/css/style.css")}}" rel="stylesheet" type="text/css">
+    <link href="{{asset("assets/admin/jalalidatepicker/persian-datepicker.min.css")}}" rel="stylesheet" type="text/css">
 
 </head>
 

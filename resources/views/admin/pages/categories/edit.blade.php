@@ -12,6 +12,15 @@
         </section>
 
         <section class="row my-3 ">
+            @if($errors->any())
+                <div class="alert alert-warning " >
+
+                    @foreach ($errors->all() as $error)
+                        <strong> {{ $error }}</strong>
+                    @endforeach
+
+                </div>
+            @endif
             <section class="col-12 ">
                 <form method="post" action="{{ route('admin.category.update',$category->id) }}">
                     @csrf
