@@ -41,6 +41,8 @@
 <script src="{{asset("assets/admin/js/bootstrap.min.js")}}"></script>
 <script src="{{asset("assets/admin/js/mdb.min.js")}}"></script>
 
+@yield("script")
+
 </body>
 
 </html>
