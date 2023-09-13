@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories');
             $table->string("image");
             $table->enum('status',["enable","disable"])->default("disable");
-            $table->tinyInteger('selelcted')->default(0);
+            $table->tinyInteger('selected')->default(0);
             $table->tinyInteger('breaking_news')->default(0);
             $table->dateTime('published_at');
             $table->timestamps();
