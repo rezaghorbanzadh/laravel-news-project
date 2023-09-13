@@ -42,7 +42,7 @@
 
                     <div class="form-group">
                         <label for="">published at</label>
-                        <input type="text" name="published_at" id="published_at" class="form-control form-control-sm d-none">
+                        <input type="text" name=" " id="published_at" class="form-control form-control-sm d-none">
                         <input type="text" id="published_at_view" class="form-control form-control-sm" value="{{ old('published_at' , $post->published_at) }}">
                     </div>
 

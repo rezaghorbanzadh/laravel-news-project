@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\BannerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,6 +39,18 @@ Route::prefix('/admin')->namespace("Admin")->group(function (){
         Route::delete('/destroy/{id}' , [PostController::class , 'destroy'])->name('admin.post.destroy');
         Route::get('/change-breaking-news/{posts}', [PostController::class , 'breakingNews'])->name('admin.post.breaking-news');
         Route::get('/change-selected/{posts}', [PostController::class , 'selected'])->name('admin.post.selected');
+    });
+
+    //banner address url
+    Route::prefix('banner')->group(function(){
+        Route::get('/' , [BannerController::class , 'index'])->name('admin.banner.index');
+        Route::get('/create' , [BannerController::class , 'create'])->name('admin.banner.create');
+        Route::post('/store' , [BannerController::class , 'store'])->name('admin.banner.store');
+        Route::get('/edit/{banner}' , [BannerController::class , 'edit'])->name('admin.banner.edit');
+        Route::put('/update/{banner}' , [BannerController::class , 'update'])->name('admin.banner.update');
+        Route::delete('/destroy/{banner}' , [BannerController::class , 'destroy'])->name('admin.banner.destroy');
+//        Route::get('/change-breaking-news/{posts}', [BannerController::class , 'breakingNews'])->name('admin.post.breaking-news');
+//        Route::get('/change-selected/{posts}', [BannerController::class , 'selected'])->name('admin.post.selected');
     });
 });
 

@@ -36,8 +36,7 @@
                         <select name="category_id" id="" class="form-control form-control-sm">
                             <option value="">selected category</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" @if (old('category_id' , $post->category_id) == $category->id) selected @endif>
-                                    {{ $category->name }}</option>
+                                <option value="{{ $category->id }}" @if(old('category_id') == $category->id) selected @endif>{{ $category->name }}</option>
                             @endforeach
 
                         </select>
