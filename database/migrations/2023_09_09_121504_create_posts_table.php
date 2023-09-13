@@ -18,11 +18,11 @@ return new class extends Migration
             $table->text("body")->collation("utf8_general_ci");
             $table->integer("view")->default(0);
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('cat_id')->constrained('categories');
-            $table->text("text");
+            $table->foreignId('category_id')->constrained('categories');
+            $table->string("image");
             $table->enum('status',["enable","disable"])->default("disable");
-            $table->tinyInteger('selelcted');
-            $table->tinyInteger('breaking_news');
+            $table->tinyInteger('selelcted')->default(0);
+            $table->tinyInteger('breaking_news')->default(0);
             $table->dateTime('published_at');
             $table->timestamps();
         });
