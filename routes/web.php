@@ -19,7 +19,7 @@ Route::prefix('/admin')->namespace("Admin")->group(function (){
     Route::get("/",function (){
        return view("admin.pages.dashboard.index");
     })->name("admin.pages.dashboard.index");
-    //category address url
+    //admin category address url
     Route::prefix('category')->group(function(){
         Route::get('/' , [CategoryController::class , 'index'])->name('admin.category.index');
         Route::get('/create' , [CategoryController::class , 'create'])->name('admin.category.create');
@@ -29,7 +29,7 @@ Route::prefix('/admin')->namespace("Admin")->group(function (){
         Route::delete('/destroy/{id}' , [CategoryController::class , 'destroy'])->name('admin.category.destroy');
     });
 
-    //post address url
+    //admin post address url
     Route::prefix('post')->group(function(){
         Route::get('/' , [PostController::class , 'index'])->name('admin.post.index');
         Route::get('/create' , [PostController::class , 'create'])->name('admin.post.create');
@@ -41,7 +41,7 @@ Route::prefix('/admin')->namespace("Admin")->group(function (){
         Route::get('/change-selected/{posts}', [PostController::class , 'selected'])->name('admin.post.selected');
     });
 
-    //banner address url
+    //admin banner address url
     Route::prefix('banner')->group(function(){
         Route::get('/' , [BannerController::class , 'index'])->name('admin.banner.index');
         Route::get('/create' , [BannerController::class , 'create'])->name('admin.banner.create');
@@ -49,8 +49,18 @@ Route::prefix('/admin')->namespace("Admin")->group(function (){
         Route::get('/edit/{banner}' , [BannerController::class , 'edit'])->name('admin.banner.edit');
         Route::put('/update/{banner}' , [BannerController::class , 'update'])->name('admin.banner.update');
         Route::delete('/destroy/{banner}' , [BannerController::class , 'destroy'])->name('admin.banner.destroy');
-//        Route::get('/change-breaking-news/{posts}', [BannerController::class , 'breakingNews'])->name('admin.post.breaking-news');
-//        Route::get('/change-selected/{posts}', [BannerController::class , 'selected'])->name('admin.post.selected');
+
+    });
+
+    //admin user address url
+    Route::prefix('user')->group(function(){
+        Route::get('/' , [BannerController::class , 'index'])->name('admin.user.index');
+        Route::get('/create' , [BannerController::class , 'create'])->name('admin.user.create');
+        Route::post('/store' , [BannerController::class , 'store'])->name('admin.user.store');
+        Route::get('/edit/{user}' , [BannerController::class , 'edit'])->name('admin.user.edit');
+        Route::put('/update/{user}' , [BannerController::class , 'update'])->name('admin.user.update');
+        Route::delete('/destroy/{user}' , [BannerController::class , 'destroy'])->name('admin.user.destroy');
+
     });
 });
 
