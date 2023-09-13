@@ -35,6 +35,12 @@ Route::prefix('/admin')->namespace("Admin")->group(function (){
         Route::post('/store' , [PostController::class , 'store'])->name('admin.post.store');
         Route::get('/edit/{post}' , [PostController::class , 'edit'])->name('admin.post.edit');
         Route::put('/update/{post}' , [PostController::class , 'update'])->name('admin.post.update');
-        Route::delete('/destroy/{id}' , [PostController::class , 'destroy'])->name('admin.Post.destroy');
+        Route::delete('/destroy/{id}' , [PostController::class , 'destroy'])->name('admin.post.destroy');
+        Route::get('/change-breaking-news/{posts}', [PostController::class , 'breakingNews'])->name('admin.post.breaking-news');
+        Route::get('/change-selected/{posts}', [PostController::class , 'selected'])->name('admin.post.selected');
     });
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

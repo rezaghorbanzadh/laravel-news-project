@@ -11,7 +11,7 @@
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom ">
             <h1 class="h5 "><i class="fas fa-newspaper "></i> Articles</h1>
             <div class="btn-toolbar mb-2 mb-md-0 ">
-                <a role="button " href=" " class="btn btn-sm btn-success ">create</a>
+                <a role="button" href="{{route("admin.post.create")}}" class="btn btn-sm btn-success ">create</a>
             </div>
         </div>
         <div class="table-responsive ">
@@ -31,43 +31,72 @@
                 </tr>
                 </thead>
                 <tbody>
-
+                @foreach($post as $posts)
                 <tr>
                     <td>
-                        <a class="text-primary " href=" ">
-                            ss
+                        <a class="text-primary" href="">
+                            {{$posts->id}}
                         </a>
                     </td>
                     <td>
-                        ss
+                    {{$posts->title}}
+
                     <td>
-                        ss </td>
-                    <td>
-                        ss
+                        {{Str::limit($posts->summary, 20, '...')}}
+
                     </td>
                     <td>
-                        <span class="badge badge-success ">#breaking_news</span>
-                        <span class="badge badge-dark ">#editor_selected</span>
+                        {{$posts->view}}
                     </td>
                     <td>
-                        ss
+                        @if ($posts->breaking_news == 1)
+                            <span class="badge badge-success">#breaking_news</span>
+                        @endif
+                        @if ($posts->selected == 1)
+                            <span class="badge badge-dark">#editor_selected</span>
+                        @endif
                     </td>
                     <td>
-                        ss
+                        {{$posts->user_id}}
                     </td>
-                    <td><img style="width: 80px; " src=" " alt=" "></td>
+                    <td>
+                        {{$posts->category_id}}
+
+                    </td>
+                    <td>
+                        @if (!empty($posts->image))
+                            <img style="width: 80px;" src="{{ asset("uploads/$posts->image")}}" alt="{{ $posts->id }}">
+                        @else
+                            <span class="text-danger">ندارد</span>
+                        @endif
+                    </td>
+
+                    <td><img style="width: 80px; " src="" alt=""></td>
                     <td style="width: 25rem; ">
-                        <a role="button " class="btn btn-sm btn-warning btn-dark text-white " href=" ">
-                            remove breaking news add breaking news
+                        <a role="button" class="btn btn-sm btn-warning btn-dark text-white" href="{{route("admin.post.breaking-news",$posts->id)}}">
+                            @if ($posts->breaking_news == 1)
+                                remove breaking news
+                            @else
+                                add breaking news
+                            @endif
                         </a>
-                        <a role="button " class="btn btn-sm btn-warning btn-dark text-white " href=" ">
-                            remove selcted add selected
+                        <a role="button" class="btn btn-sm btn-warning btn-dark text-white" href="{{route("admin.post.selected",$posts->id)}}">
+                            @if ($posts->selected == 1)
+                                remove selcted
+                            @else
+                                add selected
+                            @endif
                         </a>
-                        <hr class="my-1 " />
-                        <a role="button " class="btn btn-sm btn-primary text-white " href=" ">edit</a>
-                        <a role="button " class="btn btn-sm btn-danger text-white " href=" ">delete</a>
+                        <hr class="my-1" />
+                        <a role="button" class="btn btn-sm btn-primary text-white" href="{{ route('admin.post.edit', $posts->id) }}">edit</a>
+                        <form class="d-inline" action="{{ route('admin.post.destroy', $posts->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-danger btn-sm delete" type="submit"><i class="fa fa-trash-alt"></i> حذف</button>
+                        </form>
                     </td>
                 </tr>
+                @endforeach
                 </tbody>
 
             </table>
@@ -78,3 +107,4 @@
 
     </main>
 @endsection
+
