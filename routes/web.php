@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,14 +58,20 @@ Route::prefix('/admin')->namespace("Admin")->group(function (){
     //admin user address url
     Route::prefix('user')->group(function(){
         Route::get('/' , [UserController::class , 'index'])->name('admin.user.index');
-        Route::get('/create' , [UserController::class , 'create'])->name('admin.user.create');
-        Route::post('/store' , [UserController::class , 'store'])->name('admin.user.store');
         Route::get('/edit/{user}' , [UserController::class , 'edit'])->name('admin.user.edit');
         Route::put('/update/{user}' , [UserController::class , 'update'])->name('admin.user.update');
         Route::delete('/destroy/{user}' , [UserController::class , 'destroy'])->name('admin.user.destroy');
         Route::get('/change/{user}', [UserController::class , 'change'])->name('admin.user.change');
 
     });
+    //admin comment address url
+    Route::prefix('comment')->group(function(){
+        Route::get('/' , [CommentController::class , 'index'])->name('admin.comment.index');
+        Route::delete('/destroy/{comment}' , [CommentController::class , 'destroy'])->name('admin.comment.destroy');
+        Route::get('/status/{comment}', [CommentController::class , 'status'])->name('admin.comment.status');
+    });
+
+
 });
 
 Auth::routes();

@@ -16,9 +16,10 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('post_id')->constrained('posts');
             $table->text("comment");
-            $table->enum('status',["unseen","seen","approved"])->default("unseen");
+            $table->string('status')->default(0)->comment('0 => unseen : 1 => seen : 2 => approved');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

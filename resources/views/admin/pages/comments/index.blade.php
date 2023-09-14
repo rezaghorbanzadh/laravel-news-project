@@ -18,7 +18,7 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>user ID</th>
+                    <th>user name</th>
                     <th>post ID</th>
                     <th>comment</th>
                     <th>status</th>
@@ -26,27 +26,34 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td><a href=" ">1</a>
-                    </td>
-                    <td>
-                        ss
-                    </td>
-                    <td>
-                        ss
-                    </td>
-                    <td>
-                        ss
-                    </td>
-                    <td>
-                        ss
-                    </td>
-                    <td>
+                @foreach($comment as $comments)
+                    <tr>
+                    <td><a href="">1</a></td>
+                    <td>{{ $comments->user->name }}</td>
+                    <td>{{ $comments->post->title }}</td>
+                    <td>{{ $comments->comment }}</td>
+                    @if ($comments->status == 1)
+                        <td>فعال</td>
+                    @else
+                        <td>غیر فعال</td>
+                    @endif
 
-                        <a role="button " class="btn btn-sm btn-success text-white " href=" ">click to approved</a>
-                        <a role="button " class="btn btn-sm btn-warning text-white " href=" ">click not to approved</a>
+                    <td>
+                        @if($comments->status == 0)
+                            <a class="btn btn-sm btn-success text-white" href="{{ route('admin.comment.status', $comments->id) }}">click to approved</a>
+                        @else
+                            <a class="btn btn-sm btn-warning text-white" href="{{ route('admin.comment.status', $comments->id) }}">click not to approved</a>
+                        @endif
+
+                        <form class="d-inline" action="{{ route('admin.comment.destroy', $comments->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-danger btn-sm delete" type="submit"><i class="fa fa-trash-alt"></i> Delete</button>
+                        </form>
+
                     </td>
-                </tr>
+                @endforeach
+                    </tr>
                 </tbody>
             </table>
         </section>
