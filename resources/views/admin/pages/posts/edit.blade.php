@@ -6,12 +6,21 @@
 
 @section("main")
 
-    <main role="main " class="col-md-9 ml-sm-auto col-lg-10 px-4 ">
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 ">
 
         <section class="pt-3 pb-1 mb-2 border-bottom ">
             <h1 class="h5">Edit Article</h1>
         </section>
         <section class="row my-3">
+            @if($errors->any())
+                <div class="alert alert-warning " >
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li> {{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <section class="col-12">
 
                 <form method="post" action="{{ route('admin.post.update', $post->id) }}" enctype="multipart/form-data">

@@ -1,9 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,12 +56,13 @@ Route::prefix('/admin')->namespace("Admin")->group(function (){
 
     //admin user address url
     Route::prefix('user')->group(function(){
-        Route::get('/' , [BannerController::class , 'index'])->name('admin.user.index');
-        Route::get('/create' , [BannerController::class , 'create'])->name('admin.user.create');
-        Route::post('/store' , [BannerController::class , 'store'])->name('admin.user.store');
-        Route::get('/edit/{user}' , [BannerController::class , 'edit'])->name('admin.user.edit');
-        Route::put('/update/{user}' , [BannerController::class , 'update'])->name('admin.user.update');
-        Route::delete('/destroy/{user}' , [BannerController::class , 'destroy'])->name('admin.user.destroy');
+        Route::get('/' , [UserController::class , 'index'])->name('admin.user.index');
+        Route::get('/create' , [UserController::class , 'create'])->name('admin.user.create');
+        Route::post('/store' , [UserController::class , 'store'])->name('admin.user.store');
+        Route::get('/edit/{user}' , [UserController::class , 'edit'])->name('admin.user.edit');
+        Route::put('/update/{user}' , [UserController::class , 'update'])->name('admin.user.update');
+        Route::delete('/destroy/{user}' , [UserController::class , 'destroy'])->name('admin.user.destroy');
+        Route::get('/change/{user}', [UserController::class , 'change'])->name('admin.user.change');
 
     });
 });
