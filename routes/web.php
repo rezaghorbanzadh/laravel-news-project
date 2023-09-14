@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\MenuController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,6 +72,16 @@ Route::prefix('/admin')->namespace("Admin")->group(function (){
         Route::get('/status/{comment}', [CommentController::class , 'status'])->name('admin.comment.status');
     });
 
+    //admin menu address url
+    Route::prefix('menu')->group(function(){
+        Route::get('/' , [MenuController::class , 'index'])->name('admin.menu.index');
+        Route::get('/create' , [MenuController::class , 'create'])->name('admin.menu.create');
+        Route::post('/store' , [MenuController::class , 'store'])->name('admin.menu.store');
+        Route::get('/edit/{menu}' , [MenuController::class , 'edit'])->name('admin.menu.edit');
+        Route::put('/update/{menu}' , [MenuController::class , 'update'])->name('admin.menu.update');
+        Route::delete('/destroy/{menu}' , [MenuController::class , 'destroy'])->name('admin.menu.destroy');
+
+    });
 
 });
 
