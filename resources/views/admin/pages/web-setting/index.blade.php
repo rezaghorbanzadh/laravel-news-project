@@ -46,11 +46,11 @@
                 </tr>
                 <tr>
                     <td>Logo</td>
-                    <td><img src="{{ asset("uploads/$settings->image")}}" alt=" " width="100px " height="100px "></td>
+                    <td><img src="{{ asset("uploads/$settings->logo")}}" alt=" " width="100px " height="100px "></td>
                 </tr>
                 <tr>
                     <td>Icon</td>
-                    <td><img src="{{ asset("uploads/$settings->image")}}" alt=" " width="100px " height="100px "> </td>
+                    <td><img src="{{ asset("uploads/$settings->icon")}}" alt=" " width="100px " height="100px "> </td>
                 </tr>
                 @endforeach
                 </tbody>

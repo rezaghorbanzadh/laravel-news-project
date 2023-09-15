@@ -56,7 +56,35 @@ class SettingController extends Controller
     public function update(Request $request, Setting $setting)
     {
 
+        $inputs = $request->all();
 
+        //save image
+        if($request->hasFile('logo')) {
+
+            $file = $request->file('logo');
+            $filename = time().'_'.$file->getClientOriginalName();
+
+            // File upload location
+            $location = 'uploads';
+
+            // Upload file
+            $file->move($location,$filename);
+            $inputs['logo']=$filename;
+        }
+        if ($request->hasFile('icon')){
+
+            $file = $request->file('icon');
+            $filename = time().'_'.$file->getClientOriginalName();
+
+            // File upload location
+            $location = 'uploads';
+
+            // Upload file
+            $file->move($location,$filename);
+            $inputs['icon']=$filename;
+        }
+        $setting->update($inputs);
+        return redirect()->route("admin.setting.index");
 
     }
 
