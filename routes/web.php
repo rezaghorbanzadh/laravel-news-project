@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\SettingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -80,6 +81,13 @@ Route::prefix('/admin')->namespace("Admin")->group(function (){
         Route::get('/edit/{menu}' , [MenuController::class , 'edit'])->name('admin.menu.edit');
         Route::put('/update/{menu}' , [MenuController::class , 'update'])->name('admin.menu.update');
         Route::delete('/destroy/{menu}' , [MenuController::class , 'destroy'])->name('admin.menu.destroy');
+
+    });
+    //admin setting address url
+    Route::prefix('setting')->group(function(){
+        Route::get('/' , [SettingController::class , 'index'])->name('admin.setting.index');
+        Route::get('/edit/{setting}' , [SettingController::class , 'edit'])->name('admin.setting.edit');
+        Route::put('/update/{setting}' , [SettingController::class , 'update'])->name('admin.setting.update');
 
     });
 
