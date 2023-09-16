@@ -2,25 +2,10 @@
 <html lang="en">
 
 <head>
-    <title>Login</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="{{asset("loginregister/assets/images/icons/favicon.ico")}}" />
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{asset("loginregister/assets/vendor/bootstrap/css/bootstrap.min.css")}}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{asset("loginregister/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css")}}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{asset("loginregister/assets/vendor/animate/animate.css")}}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{asset("loginregister/assets/vendor/css-hamburgers/hamburgers.min.css")}}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{asset("loginregister/assets/vendor/select2/select2.min.css")}}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{asset("loginregister/assets/css/util.css")}}">
-    <link rel="stylesheet" type="text/css" href="{{asset("loginregister/assets/css/main.css")}}">
-    <!--===============================================================================================-->
+    <title>login</title>
+@include("auth.layouts.hed_tag")
+
+<!--===============================================================================================-->
 </head>
 
 <body>
@@ -38,7 +23,6 @@
                         Member Login
                     </span>
 
-                <div class="mb-2 alert alert-danger"> <small class="form-text text-danger"> خطا</small> </div>
 
 
                 <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
@@ -73,7 +57,7 @@
                 </div>
 
                 <div class="text-center p-t-136">
-                    <a class="txt2" href="#">
+                    <a class="txt2" href="{{ route('register') }}">
                         Create your Account
                         <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
                     </a>
@@ -85,12 +69,8 @@
 
 
 
-<script src="{{asset("loginregister/assets/vendor/jquery/jquery-3.2.1.min.js")}}"></script>
-<script src="{{asset("loginregister/assets/vendor/bootstrap/js/popper.js")}}"></script>
-<script src="{{asset("loginregister/assets/vendor/bootstrap/js/bootstrap.min.js")}}"></script>
-<script src="{{asset("loginregister/assets/vendor/select2/select2.min.js")}}"></script>
-<script src="{{asset("loginregister/assets/vendor/tilt/tilt.jquery.min.js")}}"></script>
-<script src="{{asset("loginregister/assets/js/main.js")}}"></script>
+@include("auth.layouts.script")
+
 
 </body>
 
