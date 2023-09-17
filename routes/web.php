@@ -19,9 +19,9 @@ use App\Http\Controllers\Admin\SettingController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::prefix('/admin')->namespace("Admin")->group(function (){
+Route::prefix('/admin')->namespace("Admin")->middleware("auth")->group(function (){
 
-    Route::get("/",function (){
+    Route::middleware(["admin"])->get("/",function (){
        return view("admin.pages.dashboard.index");
     })->name("admin.pages.dashboard.index");
     //admin category address url
