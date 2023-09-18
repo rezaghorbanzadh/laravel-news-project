@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\LogOutAdminController;
+use App\Http\Controllers\Admin\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,9 +23,7 @@ use App\Http\Controllers\Admin\SettingController;
 */
 Route::prefix('/admin')->namespace("Admin")->middleware("auth")->group(function (){
 
-    Route::middleware(["admin"])->get("/",function (){
-       return view("admin.pages.dashboard.index");
-    })->name("admin.pages.dashboard.index");
+    Route::middleware(["admin"])->get("/",[DashboardController::class,"index"])->name("admin.pages.dashboard.index");
     //admin category address url
     Route::prefix('category')->middleware("admin")->group(function(){
         Route::get('/' , [CategoryController::class , 'index'])->name('admin.category.index');
@@ -92,7 +92,7 @@ Route::prefix('/admin')->namespace("Admin")->middleware("auth")->group(function 
     });
 
 });
-
+Route::get("/logout",[LogOutAdminController::class ,"index"])->middleware("auth")->name("admin.log");
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

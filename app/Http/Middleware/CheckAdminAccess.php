@@ -22,7 +22,7 @@ class CheckAdminAccess
             return $next($request);
         }
 
-        return redirect('home')->with('error','You have not admin access');
+        return redirect('/');
     }
 
 }
