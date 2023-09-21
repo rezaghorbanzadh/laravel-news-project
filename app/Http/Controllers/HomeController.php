@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin\Banner;
+use App\Models\Admin\Category;
+use App\Models\Admin\Post;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +26,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $SelectedPost = Post::where('selected', 1)->orderBy('created_at', 'desc')->limit(3)->get();
+        $breakingNews = Post::where('breaking_news', 1)->orderBy('created_at', 'desc')->limit(1)->get();
+        $latestNews = Post::orderBy('created_at', 'desc')->limit(6)->get();
+        $banners = Banner::orderBy('created_at', 'desc')->limit(2)->get();
+        $categories = Category::where('created_at', '<', now())->get();
+        $popular = Post::orderBy('view', 'desc')->limit(3)->get();
+        $mostControversialPosts = Post::withCount('comments')->orderBy('comments_count', 'desc')->limit(20)->get();
+        return view('home.pages.index', compact( 'categories', 'latestNews', 'popular', 'SelectedPost', 'breakingNews', 'banners', 'mostControversialPosts'));
     }
 }

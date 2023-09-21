@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\LogOutAdminController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -92,8 +93,17 @@ Route::prefix('/admin')->namespace("Admin")->middleware("auth")->group(function 
     });
 
 });
+
+//home
+Route::prefix('')->group(function (){
+    Route::get('/' , [HomeController::class , 'index'])->name('home.index');
+    Route::get('/view-post/{post}', [HomeController::class , 'show'])->name('home.view-post');
+    Route::get('/category/{category}', [HomeController::class , 'category'])->name('home.category');
+});
+
+
+
+
+
 Route::get("/logout",[LogOutAdminController::class ,"index"])->middleware("auth")->name("admin.log");
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-

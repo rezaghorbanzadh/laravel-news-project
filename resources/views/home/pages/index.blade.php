@@ -2,6 +2,8 @@
 
 
 @section("content")
+
+
     <div class="site-main-container">
         <!-- Start top-post Area -->
         <section class="top-post-area pt-10">
@@ -10,19 +12,26 @@
                     <div class="col-lg-8 top-post-left">
                         <div class="feature-image-thumb relative">
                             <div class="overlay overlay-bg"></div>
-                            <img class="img-fluid" src="{{asset("assets/Home/img/top-post1.jpg")}}" alt="">
+                            @if(!empty($SelectedPost[0]->image))
+                            <img class="img-fluid" src='{{ asset("uploads/".$SelectedPost[0]->image) }}' alt="">
+                            @endif
                         </div>
                         <div class="top-post-details">
-                            <ul class="tags">
-                                <li><a href="#">دسته بندی</a></li>
-                            </ul>
-                            <a href="image-post.html">
-                                <h3>عنوان خبر</h3>
-                            </a>
+                            @if(!empty($SelectedPost[0]->category->name))
+                                <ul class="tags">
+                                    <li><a href="{{ route('home.category', $SelectedPost[0]->category->id) }}">{{ $SelectedPost[0]->category->name }}</a></li>
+                                </ul>
+                            @endif
+                                @if (!empty($SelectedPost[0]->title))
+                                    <a href="{{ route('home.view-post', $SelectedPost[0]->id) }}">
+                                        <h3>{{ $SelectedPost[0]->title }}</h3>
+                                    </a>
+                                @endif
+
                             <ul class="meta">
-                                <li><a href="#"><span class="lnr lnr-user"></span>ادمین</a></li>
-                                <li><a href="#">۱۳۳۹/۲/۴<span class="lnr lnr-calendar-full"></span></a></li>
-                                <li><a href="#">۵<span class="lnr lnr-bubble"></span></a></li>
+                                <li><a href="#"><span class="lnr lnr-user"></span>{{$SelectedPost[0]->user->name}}</a></li>
+                                <li><a href="#">{{jdate($SelectedPost[0]->created_at)}}<span class="lnr lnr-calendar-full"></span></a></li>
+                                <li><a href="#">{{ $SelectedPost[0]->comments->count() }}<span class="lnr lnr-bubble"></span></a></li>
                             </ul>
                         </div>
                     </div>

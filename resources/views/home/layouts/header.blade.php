@@ -25,3 +25,4 @@
 <link rel="stylesheet" href="{{asset("assets/home/css/owl.carousel.css")}}">
 <link rel="stylesheet" href="{{asset("assets/home/css/jquery-ui.css")}}">
 <link rel="stylesheet" href="{{asset("assets/home/css/main.css")}}">
+<link href="{{asset("assets/admin/jalalidatepicker/persian-datepicker.min.css")}}" rel="stylesheet" type="text/css">

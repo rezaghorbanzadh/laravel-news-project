@@ -13,3 +13,6 @@
 <script src="{{asset("assets/Home/js/owl.carousel.min.js")}}"></script>
 <script src="{{asset("assets/Home/js/mail-script.js")}}"></script>
 <script src="{{asset("assets/Home/js/main.js")}}"></script>
+<script src="{{asset("assets/admin/ckeditor/ckeditor.js")}}"></script>
+<script src="{{asset("assets/admin/jalalidatepicker/persian-datepicker.min.js")}}"></script>
+<script src="{{asset("assets/admin/jalalidatepicker/persian-date.min.js")}}"></script>
