@@ -18,13 +18,12 @@
     <div class="container main-menu" id="main-menu">
         <div class="row align-items-center justify-content-between">
             <nav id="nav-menu-container">
-                <ul class="nav-menu">
-                    <li class="menu-active"><a href="index.html">منو ۱</a></li>
-                    <li><a href="archive.html">منو ۲</a></li>
-                    <li><a href="category.html">منو ۳</a></li>
-                    <li class="menu-has-children"><a href="">منو ۴</a>
-                    </li>
+                <ul class="nav-menu" style="display: inline!important;">
+                    @foreach ( App\Models\Admin\Menu::get() as $menu)
+                    <li  style="list-style-type: none;display: inline!important;margin-left: 10px"><a style="display: inline!important; color: white;" href="{{ $menu->url }}">{{ $menu->name }}</a></li>
                 </ul>
+
+                @endforeach
             </nav>
             <!-- #nav-menu-container -->
             <div class="navbar-right">
