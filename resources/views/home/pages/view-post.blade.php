@@ -14,93 +14,88 @@
                         <div class="single-post-wrap">
                             <div class="feature-img-thumb relative">
                                 <div class="overlay overlay-bg"></div>
-                                <img class="img-fluid" src="{{asset("assets/Home/img/f1.jpg")}}" alt="">
+                                @if(!empty($post->image))
+                                <img class="img-fluid" src="{{asset("uploads/".$post->image)}}" alt="">
+                                @endif
                             </div>
                             <div class="content-wrap">
+                                @if(!empty($post->category->name))
                                 <ul class="tags mt-10">
-                                    <li><a href="#">دسته بندی</a></li>
+                                    <li><a href="#">{{$post->category->name}}</a></li>
                                 </ul>
+                                @endif
+                                @if(!empty($post->title))
                                 <a href="#">
-                                    <h3>عنوان</h3>
+                                    <h3>{{$post->title}}</h3>
                                 </a>
-                                <ul class="meta pb-20">
-                                    <li><a href="#"><span class="lnr lnr-user"></span>ادمین</a></li>
-                                    <li><a href="#">۱۳۹۹/۲۲/۳۳<span class="lnr lnr-calendar-full"></span></a></li>
-                                    <li><a href="#">۴<span class="lnr lnr-bubble"></span></a></li>
-                                </ul>
-                                متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن
-                                اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن
-                                اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن
-                                اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن
-                                اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن
-                                اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن اصلی خبر متن
-                                اصلی خبر
+                                @endif
 
-                                <div class="navigation-wrap justify-content-between d-flex">
-                                    <a class="prev" href="#"><span class="lnr lnr-arrow-right"></span>خبر بعدی</a>
-                                    <a class="next" href="#">خبر قبلی<span class="lnr lnr-arrow-left"></span></a>
+                                    <ul class="meta pb-20">
+                                    <li><a href="#"><span class="lnr lnr-user"></span>{{ $post->user->name }}</a></li>
+                                    <li><a href="#">{{ jdate( $post->cerated_at ) }}<span class="lnr lnr-calendar-full"></span></a></li>
+                                    <li><a href="#">{{ $post->comments->count() }}<span class="lnr lnr-bubble"></span></a></li>
+                                    </ul>
+                                    {!! $post->body !!}
+
+
+                                    <div class="navigation-wrap justify-content-between d-flex">
+                                        @if($prevPost !== null)
+                                    <a class="prev" href="{{ route('home.view-post', $prevPost->id) }}"><span class="lnr lnr-arrow-right"></span>خبر بعدی</a>
+                                        @endif
+                                        @if($nextPost !== null)
+                                    <a class="next" href="{{ route('home.view-post', $nextPost->id) }}">خبر قبلی<span class="lnr lnr-arrow-left"></span></a>
+                                        @endif
                                 </div>
 
                                 <div class="comment-sec-area">
                                     <div class="container">
                                         <div class="row flex-column">
                                             <h6>نظرات</h6>
-                                            <div class="comment-list">
-                                                <div class="single-comment justify-content-between d-flex">
-                                                    <div class="user justify-content-between d-flex">
-
-                                                        <div class="desc">
-                                                            <h5><a href="#">نیما کریمی</a></h5>
-                                                            <p class="date mt-3">۱۳۹۹/۲۲/۲۲</p>
-                                                            <p class="comment">
-                                                                عالی بود
-                                                            </p>
+                                            @if (empty($post->comments)))
+                                                <div class="comment-list">
+                                                    <div class="single-comment justify-content-between d-flex comment-box">
+                                                        <div class="user justify-content-between d-flex">
+                                                            <div class="desc">
+                                                                <p class="comment">
+                                                                    <span class="text-danger">نظری وجود ندارد</span>
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="comment-list left-padding">
-                                                <div class="single-comment justify-content-between d-flex">
-                                                    <div class="user justify-content-between d-flex">
-
-                                                        <div class="desc">
-                                                            <h5><a href="#">نیما کریمی</a></h5>
-                                                            <p class="date mt-3">۱۳۹۹/۲۲/۲۲</p>
-                                                            <p class="comment">
-                                                                عالی بود
-                                                            </p>
+                                            @endif
+                                            @foreach ($post->comments()->where('status', 1)->get() as $comment)
+                                                <div class="comment-list">
+                                                    <div class="single-comment justify-content-between d-flex comment-box">
+                                                        <div class="user justify-content-between d-flex">
+                                                            <div class="desc">
+                                                                <h5><a href="#">{{ $comment->user->name }}</a></h5>
+                                                                <p class="date mt-3">{{ jdate($comment->created_at) }}</p>
+                                                                <p class="comment">
+                                                                    {{ $comment->comment }}
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
-                                            </div>
-                                            <div class="comment-list">
-                                                <div class="single-comment justify-content-between d-flex">
-                                                    <div class="user justify-content-between d-flex">
+                                            @endforeach
 
-                                                        <div class="desc">
-                                                            <h5><a href="#">نیما کریمی</a></h5>
-                                                            <p class="date mt-3">۱۳۹۹/۲۲/۲۲</p>
-                                                            <p class="comment">
-                                                                عالی بود
-                                                            </p>
-                                                        </div>
-                                                    </div>
 
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="comment-form">
                                 <h4>درج نظر جدید</h4>
-                                <form>
+
+                                <form action="{{ route('admin.comment.store', $post->id) }}" method="POST">
+                                    @csrf
                                     <div class="form-group">
-                                        <textarea class="form-control mb-10" rows="5" name="message" placeholder="متن نظر" onfocus="this.placeholder = ''" onblur="this.placeholder = 'متن نظر'" required=""></textarea>
+                                        <textarea class="form-control mb-10" rows="5" name="comment" placeholder="متن نظر" onfocus="this.placeholder = ''" onblur="this.placeholder = 'متن نظر'" required=""></textarea>
                                     </div>
-                                    <a href="#" class="primary-btn text-uppercase">ارسال</a>
+                                    <button  href="{{ route('admin.comment.store', $post->id) }}" class="primary-btn text-uppercase">ارسال</button>
                                 </form>
+
                             </div>
                         </div>
                         <!-- End single-post Area -->

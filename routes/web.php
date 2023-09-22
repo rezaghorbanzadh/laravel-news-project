@@ -68,8 +68,10 @@ Route::prefix('/admin')->namespace("Admin")->middleware("auth")->group(function 
 
     });
     //admin comment address url
-    Route::prefix('comment')->middleware("admin")->group(function(){
+    Route::prefix('comment')->group(function(){
         Route::get('/' , [CommentController::class , 'index'])->name('admin.comment.index');
+        Route::get('/create', [CommentController::class , 'create'])->name('admin.comment.create');
+        Route::post('/store/{post}' , [CommentController::class ,'store'])->name('admin.comment.store');
         Route::delete('/destroy/{comment}' , [CommentController::class , 'destroy'])->name('admin.comment.destroy');
         Route::get('/status/{comment}', [CommentController::class , 'status'])->name('admin.comment.status');
     });

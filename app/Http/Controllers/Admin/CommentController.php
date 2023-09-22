@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Comeent;
 use App\Models\Admin\Comment;
+use App\Models\Admin\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -14,6 +15,7 @@ class CommentController extends Controller
      */
     public function index()
     {
+        $this->middleware("admin");
         $comment=Comment::all();
         return view("admin.pages.comments.index",compact("comment"));
     }
@@ -29,9 +31,16 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Post $post, Request $request)
     {
-        //
+        $inputs=$request->all();
+        $inputs['post_id'] = $post->id;
+        $inputs['user_id'] = auth()->user()->id;
+
+        $result = Comment::create($inputs);
+
+
+        return redirect()->back();
     }
 
     /**
@@ -63,12 +72,16 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
+        $this->middleware("admin");
+
         $comment->delete();
         return back();
     }
 
     public function status(Comment $comment)
     {
+        $this->middleware("admin");
+
         $comment->status = $comment->status == 1 ? 0 : 1 ;
         $comment->save();
         return back();
