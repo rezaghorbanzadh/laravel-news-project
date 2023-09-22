@@ -97,7 +97,7 @@ Route::prefix('/admin')->namespace("Admin")->middleware("auth")->group(function 
 //home
 Route::prefix('')->group(function (){
     Route::get('/' , [HomeController::class , 'index'])->name('home.index');
-    Route::get('/view-post/{post}', [HomeController::class , 'show'])->name('home.view-post');
+    Route::get('/view-post/{post}', [HomeController::class , 'view'])->name('home.view-post');
     Route::get('/category/{category}', [HomeController::class , 'category'])->name('home.category');
 });
 

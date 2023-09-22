@@ -14,10 +14,6 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -35,4 +31,11 @@ class HomeController extends Controller
         $mostControversialPosts = Post::withCount('comments')->orderBy('comments_count', 'desc')->limit(20)->get();
         return view('home.pages.index', compact( 'categories', 'latestNews', 'popular', 'SelectedPost', 'breakingNews', 'banners', 'mostControversialPosts'));
     }
+
+
+    public function view(Post $post){
+        $nextPost = Post::where('id', '>', $post->id)->orderBy('id', 'asc')->first();
+        $prevPost = Post::where('id', '<', $post->id)->orderBy('id', 'desc')->first();
+
+        return view('home.pages.view-post', compact('post', 'nextPost', 'prevPost'));    }
 }
