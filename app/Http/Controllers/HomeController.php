@@ -36,6 +36,9 @@ class HomeController extends Controller
     public function view(Post $post){
         $nextPost = Post::where('id', '>', $post->id)->orderBy('id', 'asc')->first();
         $prevPost = Post::where('id', '<', $post->id)->orderBy('id', 'desc')->first();
+        $SelectedPost = Post::where('selected', 1)->orderBy('created_at', 'desc')->limit(3)->get();
+        $banners = Banner::orderBy('created_at', 'desc')->limit(2)->get();
+        $mostControversialPosts = Post::withCount('comments')->orderBy('comments_count', 'desc')->limit(20)->get();
 
-        return view('home.pages.view-post', compact('post', 'nextPost', 'prevPost'));    }
+        return view('home.pages.view-post', compact('post','banners', 'nextPost', 'prevPost','mostControversialPosts','SelectedPost'));    }
 }
