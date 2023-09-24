@@ -40,5 +40,14 @@ class HomeController extends Controller
         $banners = Banner::orderBy('created_at', 'desc')->limit(2)->get();
         $mostControversialPosts = Post::withCount('comments')->orderBy('comments_count', 'desc')->limit(20)->get();
 
-        return view('home.pages.view-post', compact('post','banners', 'nextPost', 'prevPost','mostControversialPosts','SelectedPost'));    }
+        return view('home.pages.view-post', compact('post','banners', 'nextPost', 'prevPost','mostControversialPosts','SelectedPost'));
+    }
+    public function category(Post $post,Category $category){
+        $breakingNews = Post::where('breaking_news', 1)->orderBy('created_at', 'desc')->limit(1)->get();
+        $categories = $category->posts()->simplePaginate(2);
+        $SelectedPost = Post::where('selected', 1)->orderBy('created_at', 'desc')->limit(3)->get();
+
+        return view('home.pages.category', compact("SelectedPost",'category', 'breakingNews', 'categories'));
+    }
 }
+

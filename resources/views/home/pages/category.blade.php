@@ -8,15 +8,18 @@
             <div class="container no-padding">
                 <div class="row">
                     <div class="col-lg-12">
+                        @if(!empty($category->name))
                         <div class="hero-nav-area">
-                            <h1 class="text-white">اخبار دسته بندی ورزشی</h1>
-
+                            <h1 class="text-white">اخبار دسته بندی {{$category->name}}</h1>
                         </div>
+                        @endif
                     </div>
                     <div class="col-lg-12">
-                        <div class="news-tracker-wrap">
-                            <h6><span>Breaking News:</span> <a href="#">Astronomy Binoculars A Great Alternative</a></h6>
-                        </div>
+                        @if (!empty($breakingNews[0]->title ))
+                            <div class="news-tracker-wrap">
+                                <h6><span>خبر فوری:</span> <a href="{{ route('home.view-post', $breakingNews[0]->id) }}">{{ $breakingNews[0]->title }}</a></h6>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -30,102 +33,55 @@
                         <!-- Start latest-post Area -->
                         <div class="latest-post-wrap">
                             <h4 class="cat-title">آخرین اخبار</h4>
-                            <div class="single-latest-post row align-items-center">
-                                <div class="col-lg-5 post-left">
-                                    <div class="feature-img relative">
-                                        <div class="overlay overlay-bg"></div>
-                                        <img class="img-fluid" src="{{asset("assets/Home/img/l1.jpg")}}" alt="">
+
+                            @if (!empty($categories))
+
+                                @foreach ($categories as $category)
+                                    <div class="single-latest-post row align-items-center">
+                                        <div class="col-lg-5 post-left">
+                                            <div class="feature-img relative">
+                                                <div class="overlay overlay-bg"></div>
+
+                                                @if (!empty($category->image))
+                                                    <img class="img-fluid" src="{{ asset("uploads/".$category->image)}}">
+                                                @endif
+
+                                            </div>
+
+                                            @if (!empty($category->category->name))
+                                                <ul class="tags">
+                                                    <li><a href="#">{{ $category->category->name }}</a></li>
+                                                </ul>
+                                            @endif
+
+                                        </div>
+                                        <div class="col-lg-7 post-right">
+
+                                            @if (!empty($category->title))
+                                                <a href="{{ route('home.view-post', $category->id) }}">
+                                                    <h4>{{ $category->title }}</h4>
+                                                </a>
+                                            @endif
+
+                                            <ul class="meta">
+                                                <li><a href="#"><span class="lnr lnr-user"></span> {{ $category->user->username }}</a></li>
+                                                <li><a href="#">{{ jdate($category->created_at) }}<span class="lnr lnr-calendar-full"></span></a></li>
+                                                <li><a href="#"> {{ $category->comments->count() }}<span class="lnr lnr-bubble"></span></a></li>
+                                            </ul>
+                                            <p class="excert">
+                                                {!! $category->summary !!}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <ul class="tags">
-                                        <li><a href="#">دسته بندی</a></li>
-                                    </ul>
+                                @endforeach
+
+                            @endif
+                            @if (!empty($categories))
+                                <div class="mt-3">
+                                    {{ $categories->links() }}
                                 </div>
-                                <div class="col-lg-7 post-right">
-                                    <a href="image-post.html">
-                                        <h4>عنوان</h4>
-                                    </a>
-                                    <ul class="meta">
-                                        <li><a href="#"><span class="lnr lnr-user"></span>ادمین</a></li>
-                                        <li><a href="#">۱۳۳۹/۲/۴<span class="lnr lnr-calendar-full"></span></a></li>
-                                        <li><a href="#"> ۵<span class="lnr lnr-bubble"></span></a></li>
-                                    </ul>
-                                    <p class="excert">
-                                        خلاصه متن خبر
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="single-latest-post row align-items-center">
-                                <div class="col-lg-5 post-left">
-                                    <div class="feature-img relative">
-                                        <div class="overlay overlay-bg"></div>
-                                        <img class="img-fluid" src="{{asset("assets/Home/img/l1.jpg")}}" alt="">
-                                    </div>
-                                    <ul class="tags">
-                                        <li><a href="#">دسته بندی</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-lg-7 post-right">
-                                    <a href="image-post.html">
-                                        <h4>عنوان</h4>
-                                    </a>
-                                    <ul class="meta">
-                                        <li><a href="#"><span class="lnr lnr-user"></span>ادمین</a></li>
-                                        <li><a href="#">۱۳۳۹/۲/۴<span class="lnr lnr-calendar-full"></span></a></li>
-                                        <li><a href="#"> ۵<span class="lnr lnr-bubble"></span></a></li>
-                                    </ul>
-                                    <p class="excert">
-                                        خلاصه متن خبر
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="single-latest-post row align-items-center">
-                                <div class="col-lg-5 post-left">
-                                    <div class="feature-img relative">
-                                        <div class="overlay overlay-bg"></div>
-                                        <img class="img-fluid" src="{{asset("assets/Home/img/l1.jpg")}}" alt="">
-                                    </div>
-                                    <ul class="tags">
-                                        <li><a href="#">دسته بندی</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-lg-7 post-right">
-                                    <a href="image-post.html">
-                                        <h4>عنوان</h4>
-                                    </a>
-                                    <ul class="meta">
-                                        <li><a href="#"><span class="lnr lnr-user"></span>ادمین</a></li>
-                                        <li><a href="#">۱۳۳۹/۲/۴<span class="lnr lnr-calendar-full"></span></a></li>
-                                        <li><a href="#"> ۵<span class="lnr lnr-bubble"></span></a></li>
-                                    </ul>
-                                    <p class="excert">
-                                        خلاصه متن خبر
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="single-latest-post row align-items-center">
-                                <div class="col-lg-5 post-left">
-                                    <div class="feature-img relative">
-                                        <div class="overlay overlay-bg"></div>
-                                        <img class="img-fluid" src="{{asset("assets/Home/img/l1.jpg")}}" alt="">
-                                    </div>
-                                    <ul class="tags">
-                                        <li><a href="#">دسته بندی</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-lg-7 post-right">
-                                    <a href="image-post.html">
-                                        <h4>عنوان</h4>
-                                    </a>
-                                    <ul class="meta">
-                                        <li><a href="#"><span class="lnr lnr-user"></span>ادمین</a></li>
-                                        <li><a href="#">۱۳۳۹/۲/۴<span class="lnr lnr-calendar-full"></span></a></li>
-                                        <li><a href="#"> ۵<span class="lnr lnr-bubble"></span></a></li>
-                                    </ul>
-                                    <p class="excert">
-                                        خلاصه متن خبر
-                                    </p>
-                                </div>
-                            </div>
+                            @endif
+
                         </div>
                         <!-- End latest-post Area -->
 
@@ -135,170 +91,68 @@
                         </div>
                         <!-- End banner-ads Area -->
                         <!-- Start popular-post Area -->
-                        <div class="popular-post-wrap">
-                            <h4 class="title">اخبار پربازدید</h4>
-                            <div class="feature-post relative">
-                                <div class="feature-img relative">
-                                    <div class="overlay overlay-bg"></div>
-                                    <img class="img-fluid" src="{{asset("assets/Home/img/f1.jpg")}}" alt="">
-                                </div>
-                                <div class="details">
-                                    <ul class="tags">
-                                        <li><a href="#">دسته بندی</a></li>
-                                    </ul>
-                                    <a href="image-post.html">
-                                        <h3>عنوان</h3>
-                                    </a>
-                                    <ul class="meta">
-                                        <li><a href="#"><span class="lnr lnr-user"></span>ادمین</a></li>
-                                        <li><a href="#">۱۳۳۹/۲/۴<span class="lnr lnr-calendar-full"></span></a></li>
-                                        <li><a href="#">۷<span class="lnr lnr-bubble"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row mt-20 medium-gutters">
-                                <div class="col-lg-6 single-popular-post">
-                                    <div class="feature-img-wrap relative">
-                                        <div class="feature-img relative">
-                                            <div class="overlay overlay-bg"></div>
-                                            <img class="img-fluid" src="{{asset("assets/Home/img/f2.jpg")}}" alt="">
-                                        </div>
-                                        <ul class="tags">
-                                            <li><a href="#">دسته بندی</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="details">
-                                        <a href="image-post.html">
-                                            <h4>عنوان</h4>
-                                        </a>
-                                        <ul class="meta">
-                                            <li><a href="#"><span class="lnr lnr-user"></span>ادمین</a></li>
-                                            <li><a href="#">۱۳۳۹/۲/۴<span class="lnr lnr-calendar-full"></span></a></li>
-                                            <li><a href="#"> ۵<span class="lnr lnr-bubble"></span></a></li>
-                                        </ul>
-                                        <p class="excert">
-                                            خلاصه متن خبر
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 single-popular-post">
-                                    <div class="feature-img-wrap relative">
-                                        <div class="feature-img relative">
-                                            <div class="overlay overlay-bg"></div>
-                                            <img class="img-fluid" src="{{asset("assets/Home/img/f3.jpg")}}" alt="">
-                                        </div>
-                                        <ul class="tags">
-                                            <li><a href="#">دسته بندی</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="details">
-                                        <a href="image-post.html">
-                                            <h4>عنوان</h4>
-                                        </a>
-                                        <ul class="meta">
-                                            <li><a href="#"><span class="lnr lnr-user"></span>ادمین</a></li>
-                                            <li><a href="#">۱۳۳۹/۲/۴<span class="lnr lnr-calendar-full"></span></a></li>
-                                            <li><a href="#">۷<span class="lnr lnr-bubble"></span></a></li>
-                                        </ul>
-                                        <p class="excert">
-                                            خلاصه متن خبر
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                         <!-- End popular-post Area -->
                     </div>
                     <div class="col-lg-4">
                         <div class="sidebars-area">
                             <div class="single-sidebar-widget editors-pick-widget">
                                 <h6 class="title">انتخاب سردبیر</h6>
+
                                 <div class="editors-pick-post">
                                     <div class="feature-img-wrap relative">
                                         <div class="feature-img relative">
                                             <div class="overlay overlay-bg"></div>
-                                            <img class="img-fluid" src="{{asset("assets/Home/img/e1.jpg")}}" alt="">
+                                            <img class="img-fluid" src="{{asset("uploads/".$SelectedPost[0]->image)}}" alt="">
+
                                         </div>
                                         <ul class="tags">
-                                            <li><a href="#">دسته بندی</a></li>
+                                            <li><a href="{{ route('home.category', $SelectedPost[0]->category->id) }}">{{ $SelectedPost[0]->category->name }}</a></li>
                                         </ul>
                                     </div>
                                     <div class="details">
-                                        <a href="image-post.html">
-                                            <h4 class="mt-20">عنوان</h4>
+                                        <a href="{{ route('home.view-post', $SelectedPost[0]->id) }}">
+                                            <h4 class="mt-20">{{ $SelectedPost[0]->title }}</h4>
                                         </a>
                                         <ul class="meta">
-                                            <li><a href="#"><span class="lnr lnr-user"></span>ادمین</a></li>
-                                            <li><a href="#">۱۳۳۹/۲/۴<span class="lnr lnr-calendar-full"></span></a></li>
-                                            <li><a href="#">۵<span class="lnr lnr-bubble"></span></a></li>
+                                            <li><a href="#"><span class="lnr lnr-user"></span> {{ $SelectedPost[0]->user->username }}</a></li>
+                                            <li><a href="#">{{ jdate( $SelectedPost[0]->cerated_at ) }}<span class="lnr lnr-calendar-full"></span></a></li>
+                                            <li><a href="#"> {{ $SelectedPost[0]->comments->count() }}<span class="lnr lnr-bubble"></span></a></li>
                                         </ul>
                                         <p class="excert">
-                                            خلاصه متن خبر
+                                            {!! $SelectedPost[0]->summary !!}
                                         </p>
                                     </div>
                                 </div>
+
+
                             </div>
+
                             <div class="single-sidebar-widget ads-widget">
-                                <img class="img-fluid" src="{{asset("assets/Home/img/sidebar-ads.jpg")}}" alt="">
+                                <img class="img-fluid" src="{{asset("uploads/".$banners[0]->image)}}" alt="">
                             </div>
+
 
                             <div class="single-sidebar-widget most-popular-widget">
                                 <h6 class="title">پر بحث ترین ها</h6>
-                                <div class="single-list flex-row d-flex">
-                                    <div class="thumb">
-                                        <img src="{{asset("assets/Home/img/m1.jpg")}}" alt="">
+
+                                @foreach ($mostControversialPosts as $mostControversialPost)
+                                    <div class="single-list flex-row d-flex box">
+                                        <div class="thumb">
+                                            <img width="110" src="{{asset("uploads/".$mostControversialPost->image)}}  }}" alt="">
+                                        </div>
+                                        <div class="details">
+                                            <a href="{{ route('home.view-post', $mostControversialPost->id) }}">
+                                                <h6>{{ $mostControversialPost->title }}</h6>
+                                            </a>
+                                            <ul class="meta">
+                                                <li><a href="#"> {{ jdate($mostControversialPost->created_at) }}<span class="lnr lnr-calendar-full"></span></a></li>
+                                                <li><a href="#"> {{ $mostControversialPost->comments->count() }}<span class="lnr lnr-bubble"></span></a></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="details">
-                                        <a href="image-post.html">
-                                            <h6>عنوان خبر</h6>
-                                        </a>
-                                        <ul class="meta">
-                                            <li><a href="#">۱۳۳۹/۲/۴<span class="lnr lnr-calendar-full"></span></a></li>
-                                            <li><a href="#">۱۰۰<span class="lnr lnr-bubble"></span></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="single-list flex-row d-flex">
-                                    <div class="thumb">
-                                        <img src="{{asset("assets/Home/img/m1.jpg")}}" alt="">
-                                    </div>
-                                    <div class="details">
-                                        <a href="image-post.html">
-                                            <h6>عنوان خبر</h6>
-                                        </a>
-                                        <ul class="meta">
-                                            <li><a href="#">۱۳۳۹/۲/۴<span class="lnr lnr-calendar-full"></span></a></li>
-                                            <li><a href="#">۱۰۰<span class="lnr lnr-bubble"></span></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="single-list flex-row d-flex">
-                                    <div class="thumb">
-                                        <img src="{{asset("assets/Home/img/m1.jpg")}}" alt="">
-                                    </div>
-                                    <div class="details">
-                                        <a href="image-post.html">
-                                            <h6>عنوان خبر</h6>
-                                        </a>
-                                        <ul class="meta">
-                                            <li><a href="#">۱۳۳۹/۲/۴<span class="lnr lnr-calendar-full"></span></a></li>
-                                            <li><a href="#">۱۰۰<span class="lnr lnr-bubble"></span></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="single-list flex-row d-flex">
-                                    <div class="thumb">
-                                        <img src="{{asset("assets/Home/img/m1.jpg")}}" alt="">
-                                    </div>
-                                    <div class="details">
-                                        <a href="image-post.html">
-                                            <h6>عنوان خبر</h6>
-                                        </a>
-                                        <ul class="meta">
-                                            <li><a href="#">۱۳۳۹/۲/۴<span class="lnr lnr-calendar-full"></span></a></li>
-                                            <li><a href="#">۱۰۰<span class="lnr lnr-bubble"></span></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                @endforeach
+
                             </div>
 
                         </div>
