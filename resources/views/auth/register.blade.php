@@ -96,6 +96,12 @@
                         <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
                     </a>
                 </div>
+                <div class="text-center p-t-13">
+                    <a class="txt2" href="{{ route('auth.google') }}">
+                        login with google
+                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    </a>
+                </div>
             </form>
         </div>
     </div>

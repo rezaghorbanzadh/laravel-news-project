@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\LogOutAdminController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
@@ -108,4 +109,9 @@ Route::prefix('')->group(function (){
 
 
 Route::get("/logout",[LogOutAdminController::class ,"index"])->middleware("auth")->name("admin.log");
+
+
 Auth::routes();
+
+Route::get("/auth/google",[GoogleAuthController::class,"redirect"])->name("auth.google");
+Route::get("/auth/google/redirect",[GoogleAuthController::class,"callback"]);
