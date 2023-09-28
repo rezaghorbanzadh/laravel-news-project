@@ -111,7 +111,8 @@ Route::prefix('')->group(function (){
 Route::get("/logout",[LogOutAdminController::class ,"index"])->middleware("auth")->name("admin.log");
 
 
-Auth::routes();
 
 Route::get("/auth/google",[GoogleAuthController::class,"redirect"])->name("auth.google");
 Route::get("/auth/google/redirect",[GoogleAuthController::class,"callback"]);
+
+Auth::routes();
